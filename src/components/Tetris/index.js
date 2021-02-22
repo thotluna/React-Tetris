@@ -1,11 +1,12 @@
 import Display from "components/Display";
 import Stage from "components/Stage";
 import StartButton from "components/StartButton";
+import { createStage } from "utils/gameHelper";
 
 export default function Tetris() {
   return (
     <div>
-      <Stage />
+      <Stage stage={createStage()} />
       <aside>
         <div>
           <Display text="Score" />
