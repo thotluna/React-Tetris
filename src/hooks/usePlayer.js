@@ -39,6 +39,7 @@ export const usePlayer = () => {
 
   const updatePlayerPos = ({ x, y, collided }) => {
     setPlayer((prev) => {
+      console.log({ y, newY: prev.pos.y + y });
       return {
         ...prev,
         pos: { x: prev.pos.x + x, y: prev.pos.y + y },
