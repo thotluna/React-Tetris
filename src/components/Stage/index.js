@@ -1,8 +1,8 @@
 import Cell from "components/Cell";
-import React from "react";
-import { StyledMinStage, StyledStage } from "./StyledStage";
+import { memo } from "react";
+import { StyledStage, StyledMinStage } from "./StyledStage";
 
-export default function Stage({ stage, min }) {
+function Stage({ stage, min = null }) {
   if (!min)
     return (
       <StyledStage width={stage[0].length} height={stage.length}>
@@ -19,3 +19,5 @@ export default function Stage({ stage, min }) {
     </StyledMinStage>
   );
 }
+
+export default memo(Stage);
