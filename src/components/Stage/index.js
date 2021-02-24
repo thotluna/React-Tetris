@@ -1,13 +1,21 @@
 import Cell from "components/Cell";
 import React from "react";
-import { StyledStage } from "./StyledStage";
+import { StyledMinStage, StyledStage } from "./StyledStage";
 
-export default function Stage({ stage }) {
+export default function Stage({ stage, min }) {
+  if (!min)
+    return (
+      <StyledStage width={stage[0].length} height={stage.length}>
+        {stage.map((row) =>
+          row.map((cell, x) => <Cell key={x} type={cell[0]} />)
+        )}
+      </StyledStage>
+    );
   return (
-    <StyledStage width={stage[0].length} height={stage.length}>
+    <StyledMinStage width={stage[0].length} height={stage.length}>
       {stage.map((row) =>
         row.map((cell, x) => <Cell key={x} type={cell[0]} />)
       )}
-    </StyledStage>
+    </StyledMinStage>
   );
 }

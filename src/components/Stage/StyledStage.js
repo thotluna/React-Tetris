@@ -11,5 +11,16 @@ export const StyledStage = styled.div`
   border: 2px solid #333;
   width: 100%;
   max-width: 25vw;
-  background: #111;
+  background: 25vw;
+`;
+
+export const StyledMinStage = styled(StyledStage)`
+  max-width: 200px;
+  max-height: 205px;
+  display: grid;
+  grid-template-rows: repeat(
+    ${(props) => props.height},
+    calc(200px / ${(props) => props.width})
+  );
+  margin-bottom: 8px;
 `;

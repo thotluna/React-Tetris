@@ -1,9 +1,16 @@
 export const STAGE_WIDTH = 12;
 export const STAGE_HEIGHT = 20;
 
+export const STAGE_WIDTH_MIN = 5;
+export const STAGE_HEIGHT_MIN = 5;
+
 export const createStage = () =>
   Array.from(Array(STAGE_HEIGHT), () =>
     new Array(STAGE_WIDTH).fill([0, "clear"])
+  );
+export const createMinStage = () =>
+  Array.from(Array(STAGE_HEIGHT_MIN), () =>
+    new Array(STAGE_WIDTH_MIN).fill([0, "clear"])
   );
 
 export const checkCollision = (player, stage, { x: moveX, y: moveY }) => {

@@ -6,9 +6,11 @@ import { useInterval } from "hooks/useInterval";
 
 import { StyledTetrisWrapper } from "./StyledTetrisWrapper";
 import { StyledTetris } from "./StyledTetris";
+import { useStageMin } from "hooks/useMinStage";
 
 export default function Tetris({ data }) {
   const {
+    player,
     stage,
     gameOver,
     score,
@@ -20,6 +22,8 @@ export default function Tetris({ data }) {
     keyUp,
     move,
   } = data;
+
+  const [minStage] = useStageMin(player.nextTetromino);
 
   useInterval(() => {
     drop();
@@ -42,6 +46,7 @@ export default function Tetris({ data }) {
               <Display text={`Score: ${score}`} />
               <Display text={`Rows: ${rows}`} />
               <Display text={`Level: ${level}`} />
+              <Stage stage={minStage} min="true" />
             </div>
           )}
           <StartButton callback={startGame} />

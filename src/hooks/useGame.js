@@ -81,6 +81,7 @@ export const useGame = () => {
   };
 
   return {
+    player,
     stage,
     gameOver,
     score,

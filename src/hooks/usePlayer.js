@@ -6,6 +6,7 @@ export const usePlayer = () => {
   const [player, setPlayer] = useState({
     pos: { x: 0, y: 0 },
     tetromino: TETROMINOS[0].shape,
+    nextTetromino: randomTetromino().shape,
     collided: false,
   });
 
@@ -39,7 +40,6 @@ export const usePlayer = () => {
 
   const updatePlayerPos = ({ x, y, collided }) => {
     setPlayer((prev) => {
-      console.log({ y, newY: prev.pos.y + y });
       return {
         ...prev,
         pos: { x: prev.pos.x + x, y: prev.pos.y + y },
@@ -50,11 +50,13 @@ export const usePlayer = () => {
   };
 
   const resetPlayer = useCallback(() => {
-    setPlayer({
-      pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
-      // pos: { x: 0, y: 0 },
-      tetromino: randomTetromino().shape,
-      collided: false,
+    setPlayer((prev) => {
+      return {
+        pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
+        tetromino: prev.nextTetromino,
+        nextTetromino: randomTetromino().shape,
+        collided: false,
+      };
     });
   }, []);
 
