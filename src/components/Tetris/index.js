@@ -8,16 +8,20 @@ import { StyledTetrisWrapper } from "./StyledTetrisWrapper";
 import { StyledTetris } from "./StyledTetris";
 import { useStageMin } from "hooks/useMinStage";
 
+import { stateGame } from "types";
+
 export default function Tetris({ data }) {
   const {
     player,
     stage,
-    gameOver,
+    gameState,
+    // pause,
     score,
     rows,
     level,
     dropTime,
     startGame,
+    pauseGame,
     drop,
     keyUp,
     move,
@@ -39,17 +43,29 @@ export default function Tetris({ data }) {
       <StyledTetris>
         <Stage stage={stage} />
         <aside>
-          {gameOver ? (
-            <Display gameOver={gameOver} text="Game Over" />
+          {gameState === stateGame.GAME_OVER ? (
+            <Display
+              alert={gameState === stateGame.GAME_OVER}
+              text="Game Over"
+            />
           ) : (
             <div>
               <Display text={`Score: ${score}`} />
               <Display text={`Rows: ${rows}`} />
               <Display text={`Level: ${level}`} />
-              <Stage stage={minStage} min="true" />
+              {gameState === stateGame.IN_GAME && (
+                <Stage stage={minStage} min="true" />
+              )}
             </div>
           )}
-          <StartButton callback={startGame} />
+          {gameState === stateGame.IN_GAME || gameState === stateGame.PAUSE ? (
+            <StartButton
+              callback={pauseGame}
+              text={gameState === stateGame.IN_GAME ? "Pause" : "Restart"}
+            />
+          ) : (
+            <StartButton callback={startGame} text="Start Game" />
+          )}
         </aside>
       </StyledTetris>
     </StyledTetrisWrapper>
